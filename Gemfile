@@ -68,4 +68,5 @@ group :development do
 end
 
 
+gem 'devise', branch: 'rails_7', github: 'DavidColby/devise'
 gem "stimulus_reflex", "= 3.5.0.pre8"
