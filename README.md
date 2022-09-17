@@ -1,7 +1,9 @@
 # Introduction to Hotwired ATS
 
 
-Hello and welcome to Hotwired ATS! Hotwired ATS is a step-by-step guide to building modern Ruby on Rails applications using the Hotwire stack, CableReady, and StimulusReflex. This book is intended to give developers like you an approachable introduction to Hotwire and the surrounding ecosystem so that you can confidently build full-stack, reactive web applications with Ruby on Rails. My goal as a writer is for you to leave this book feeling prepared to use the Hotwire stack, CableReady, and StimulusReflex in your own applications.
+Hello and welcome to Hotwired ATS (applicant tracking system)!
+
+Hotwired ATS is a step-by-step guide to building modern Ruby on Rails applications using the Hotwire stack, CableReady, and StimulusReflex. This book is intended to give developers like you an approachable introduction to Hotwire and the surrounding ecosystem so that you can confidently build full-stack, reactive web applications with Ruby on Rails. My goal as a writer is for you to leave this book feeling prepared to use the Hotwire stack, CableReady, and StimulusReflex in your own applications.
 
 Throughout this book, we will have opportunities to use Turbo Frames, Turbo Streams, Stimulus, CableReady, StimulusReflex, and Mrujs in a variety of situations. The application we build will be large enough to introduce a bit of complexity to the features we build while still being small enough to wrap our heads around. We will not build a commercial-grade, production-ready application in this book. Instead, we focus on finding ways to use the modern Rails stack to implement interesting features in an application larger than the typical toy applications used in most tutorials.
 

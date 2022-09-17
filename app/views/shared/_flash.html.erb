@@ -1,0 +1,18 @@
+<div class="fixed inset-x-0 z-50 flex items-end justify-end px-4 py-6 pointer-events-none -bottom-32 justify-right sm:p-6">
+  <div data-controller="alert" class="max-w-sm w-full h-24 shadow-lg rounded px-4 py-3 rounded relative border-l-4 text-white pointer-events-auto <%= flash_class(level) %>">
+    <div class="p-2">
+      <div class="flex items-start">
+        <div class="ml-3 w-0 flex-1 pt-0.5">
+          <p class="text-sm leading-5">
+            <%= content %>
+          </p>
+        </div>
+        <div class="flex flex-shrink-0 ml-4">
+          <button data-action="alert#close" class="inline-flex text-white transition duration-150 ease-in-out focus:outline-none focus:text-gray-300">
+            <%= inline_svg_tag 'close.svg', class: 'h-4 w-4 inline-block' %>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
