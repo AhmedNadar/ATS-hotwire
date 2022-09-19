@@ -13,4 +13,6 @@ class Job < ApplicationRecord
     full_time: 'full_time',
     part_time: 'part_time'
   }
+
+  has_rich_text :description
 end

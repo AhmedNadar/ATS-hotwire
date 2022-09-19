@@ -1,0 +1,11 @@
+<div data-slideover-target="slideover" class="fixed top-0 z-40 flex flex-col flex-1 w-full h-screen overflow-y-scroll transition-all duration-500 bg-gray-100 -right-full lg:-right-1/3 lg:w-1/3">
+  <div class="flex items-center justify-between px-4 bg-gray-900">
+    <h3 class="text-xl text-white" id="slideover-header"></h3>
+    <button data-action="slideover#close" class="flex items-center justify-center w-12 h-12 rounded-full focus:outline-none focus:bg-gray-600 hover:bg-gray-600" aria-label="Close slideover">
+      <%= inline_svg_tag 'close.svg', class: "h-7 w-7 text-white" %>
+    </button>
+  </div>
+  <div class="px-4 mt-4 text-gray-700">
+    <div id="slideover-content"></div>
+  </div>
+</div>
