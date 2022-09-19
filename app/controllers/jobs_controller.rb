@@ -11,6 +11,30 @@ class JobsController < ApplicationController
   def show
   end
 
+  ## Sidebar: Adding jobs with Turbo Streams
+
+  # def new
+  #   @job = Job.new
+  # end
+
+  # def create
+  #   @job = Job.new(job_params)
+  #   @job.account = current_user.account
+  #   if @job.save
+  #     render turbo_stream: turbo_stream.prepend(
+  #       'jobs',
+  #       partial: 'job',
+  #       locals: { job: @job }
+  #     )
+  #   else
+  #     render turbo_stream: turbo_stream.replace(
+  #       'job-form',
+  #       partial: 'form',
+  #       locals: { job: @job }
+  #     ), status: :unprocessable_entity
+  #   end
+  # end
+
   def new
     html = render_to_string(partial: 'form', locals: { job: Job.new })
     render operations: cable_car
