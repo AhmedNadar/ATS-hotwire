@@ -71,3 +71,4 @@ end
 gem 'devise', branch: 'rails_7', github: 'DavidColby/devise'
 gem "stimulus_reflex", "= 3.5.0.pre8"
 gem "inline_svg", "~> 1.8"
+gem 'annotate'
