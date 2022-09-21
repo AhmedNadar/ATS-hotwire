@@ -30,9 +30,10 @@ class Applicant < ApplicationRecord
 
   validates_presence_of :first_name, :last_name, :email
 
+  has_one_attached :resume
+
   def name
     [first_name, last_name].join(' ')
   end
 
-  has_one_attached :resume
 end

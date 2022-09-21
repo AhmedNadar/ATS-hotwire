@@ -11,3 +11,4 @@ window.Stimulus = application
 StimulusReflex.initialize(application, { isolate: true })
 
 export { application }
+
