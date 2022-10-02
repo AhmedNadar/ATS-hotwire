@@ -1,10 +1,27 @@
 class ApplicantsController < ApplicationController
   before_action :set_applicant, only: %i[ show edit update destroy change_stage ]
   before_action :authenticate_user!
+   include Filterable
 
   def index
-    @applicants = Applicant.all
+    @grouped_applicants = filter!(Applicant)
+                          .for_account(current_user.account_id)
+                          .group_by(&:stage)
   end
+
+  # def index
+  #   if search_params.present?
+  #     @applicants = Applicant.includes(:job)
+  #     @applicants = @applicants.where(job_id: search_params[:job]) if search_params[:job].present?
+  #     @applicants = @applicants.text_search(search_params[:query]) if search_params[:query].present?
+  #     if search_params[:sort].present?
+  #       sort = search_params[:sort].split('-')
+  #       @applicants = @applicants.order("#{sort[0]} #{sort[1]}")
+  #     end
+  #   else
+  #     @applicants = Applicant.includes(:job).all
+  #   end
+  # end
 
   def show
   end
@@ -60,13 +77,19 @@ class ApplicantsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_applicant
-      @applicant = Applicant.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def applicant_params
-      params.require(:applicant).permit(:first_name, :last_name, :email, :phone, :stage, :status, :job_id, :resume)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_applicant
+    @applicant = Applicant.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def applicant_params
+    params.require(:applicant).permit(:first_name, :last_name, :email, :phone, :stage, :status, :job_id, :resume)
+  end
+
+  # Be sure to place this at the bottom of the controller, with the other private methods
+  def search_params
+    params.permit(:query, :job, :sort)
+  end
 end
