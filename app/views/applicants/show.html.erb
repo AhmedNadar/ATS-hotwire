@@ -3,12 +3,12 @@
     <%= @applicant.name %>
   </h2>
   <%= link_to "Send email",
-  new_applicant_email_path(@applicant),
-  class: "btn-primary-outline",
-  data: {
-    action: "click->slideover#open",
-    remote: true
-  } %>
+    new_applicant_email_path(@applicant),
+    class: "btn-primary-outline",
+    data: {
+      action: "click->slideover#open",
+      remote: true
+    } %>
 </div>
 <div class="p-4 text-gray-700 shadow">
   <div class="flex justify-between mb-6">

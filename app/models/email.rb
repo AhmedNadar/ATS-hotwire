@@ -1,5 +1,6 @@
 class Email < ApplicationRecord
-  after_create_commit :send_email
+  # after_create_commit :send_email
+  after_create_commit :send_email, if: :outbound?
 
   has_rich_text :body
 
@@ -11,4 +12,9 @@ class Email < ApplicationRecord
   def send_email
     ApplicantMailer.contact(email: self).deliver_later
   end
+
+  enum email_type: {
+    outbound: 'outbound',
+    inbound: 'inbound'
+  }
 end
