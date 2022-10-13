@@ -1,0 +1,15 @@
+<div>
+  <%= link_to applicant_email_path(@applicant, email), data: { action: "click->slideover#open", remote: true } do %>
+    <div class="flex items-center p-2 cursor-pointer hover:bg-blue-200">
+      <div class="mr-2 text-gray-500">
+        <%= inline_svg_tag(email_type_icon(email.email_type), class: "h-6 w-6 inline-block") %>
+      </div>
+      <div>
+        <h4 class="text-lg text-gray-900"><%= email.subject %></h4>
+        <div class="text-sm text-gray-700">
+          <p><%= l(email.created_at, format: :long) %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

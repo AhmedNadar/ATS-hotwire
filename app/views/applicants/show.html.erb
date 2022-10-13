@@ -27,11 +27,17 @@
     </div>
   </div>
   <!-- Resume goes here -->
-  <% if @applicant.resume.attached? %>
-    <%= turbo_frame_tag "resume", src: applicant_resume_path(@applicant), loading: "lazy" do %>
-      <div class="w-full bg-gray-100 rounded flex justify-center items-center h-[1000px]">
-        Loading...
-      </div>
+  <div class="flex w-full">
+    <div class="w-1/3 p-4 mr-2 overflow-y-scroll bg-gray-100 border-2 border-gray-200 divide-y divide-gray-500 rounded shadow emails-container">
+      <h3 class="text-xl font-bold">Communication history</h3>
+      <%= turbo_frame_tag "emails", src: applicant_emails_path(@applicant), class: "max-height[1000px]" %>
+    </div>
+    <% if @applicant.resume.attached? %>
+      <%= turbo_frame_tag "resume", src: applicant_resume_path(@applicant), loading: "lazy", class: "w-2/3" do %>
+        <div class="flex items-center justify-center w-full bg-gray-100 rounded" style="height: 1000px;">
+          Loading...
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
