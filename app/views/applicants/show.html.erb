@@ -1,3 +1,6 @@
+<%= turbo_stream_from @applicant, :emails %>
+<%#= turbo_frame_tag "emails", src: applicant_emails_path(@applicant), class: "max-height[1000px]" %>
+
 <div class="flex items-baseline justify-between mb-6 text-gray-700">
   <h2 class="mt-6 text-3xl font-extrabold">
     <%= @applicant.name %>

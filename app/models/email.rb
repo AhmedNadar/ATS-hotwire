@@ -1,7 +1,4 @@
 class Email < ApplicationRecord
-  # after_create_commit :send_email
-  after_create_commit :send_email, if: :outbound?
-
   has_rich_text :body
 
   belongs_to :applicant
@@ -9,14 +6,31 @@ class Email < ApplicationRecord
 
   validates_presence_of :subject
 
-  def send_email
-    ApplicantMailer.contact(email: self).deliver_later
-  end
+  after_create_commit :send_email, if: :outbound?
 
   enum email_type: {
     outbound: 'outbound',
     inbound: 'inbound'
   }
+
+  after_create_commit :broadcast_to_applicant
+
+  def broadcast_to_applicant
+    broadcast_prepend_later_to(
+      applicant,
+      :emails,
+      target: 'emails-list',
+      partial: 'emails/list_item',
+      locals: {
+        email: self,
+        applicant: applicant
+      }
+    )
+  end
+
+  def send_email
+    ApplicantMailer.contact(email: self).deliver_later
+  end
 
   def build_reply(email_id)
     replying_to = Email.find(email_id)
