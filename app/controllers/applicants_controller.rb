@@ -1,27 +1,13 @@
 class ApplicantsController < ApplicationController
   before_action :set_applicant, only: %i[ show edit update destroy change_stage ]
   before_action :authenticate_user!
-   include Filterable
+  include Filterable
 
   def index
     @grouped_applicants = filter!(Applicant)
                           .for_account(current_user.account_id)
                           .group_by(&:stage)
   end
-
-  # def index
-  #   if search_params.present?
-  #     @applicants = Applicant.includes(:job)
-  #     @applicants = @applicants.where(job_id: search_params[:job]) if search_params[:job].present?
-  #     @applicants = @applicants.text_search(search_params[:query]) if search_params[:query].present?
-  #     if search_params[:sort].present?
-  #       sort = search_params[:sort].split('-')
-  #       @applicants = @applicants.order("#{sort[0]} #{sort[1]}")
-  #     end
-  #   else
-  #     @applicants = Applicant.includes(:job).all
-  #   end
-  # end
 
   def show
   end

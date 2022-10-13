@@ -17,6 +17,8 @@ class Applicant < ApplicationRecord
   include PgSearch::Model
   FILTER_PARAMS = %i[query job sort].freeze
 
+  has_one_attached :resume
+  has_many :emails, dependent: :destroy
   belongs_to :job
 
   enum stage: {
@@ -32,8 +34,6 @@ class Applicant < ApplicationRecord
   }
 
   validates_presence_of :first_name, :last_name, :email
-
-  has_one_attached :resume
 
   pg_search_scope :text_search,
     against: %i[first_name last_name email],
