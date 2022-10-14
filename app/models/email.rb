@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: emails
+#
+#  id           :uuid             not null, primary key
+#  applicant_id :uuid             not null
+#  user_id      :uuid             not null
+#  subject      :text
+#  sent_at      :datetime
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  email_type   :string
+#
 class Email < ApplicationRecord
   has_rich_text :body
 
@@ -24,6 +37,18 @@ class Email < ApplicationRecord
       locals: {
         email: self,
         applicant: applicant
+      }
+    )
+  end
+
+  after_create_commit :create_notification, if: :inbound?
+
+  def create_notification
+    InboundEmailNotification.create(
+      user: user,
+      params: {
+        applicant: applicant,
+        email: self
       }
     )
   end

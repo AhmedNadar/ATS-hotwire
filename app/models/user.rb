@@ -13,6 +13,7 @@
 #  last_name              :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  email_alias            :string
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -24,6 +25,7 @@ class User < ApplicationRecord
   belongs_to :account
   accepts_nested_attributes_for :account
   has_many :emails, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   def generate_alias
     email_alias = "#{email.split('@')[0]}-#{id[0...4]}"
