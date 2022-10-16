@@ -33,5 +33,9 @@ module HotwiredAts
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # https://discuss.rubyonrails.org/t/cve-2022-32224-possible-rce-escalation-bug-with-serialized-columns-in-active-record/81017/1
+    config.active_record.yaml_column_permitted_classes = [Symbol]
+    # config.active_record.use_yaml_unsafe_load
   end
 end
