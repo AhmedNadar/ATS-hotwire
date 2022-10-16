@@ -6,8 +6,7 @@ class ApplicantMailer < ApplicationMailer
 
     mail(
       to: @applicant.email,
-      from: "reply-#{@user.email_alias}@hotwiringrails.com",
-      # from: @user.email,
+      from: @user.email,
       subject: @email.subject
     )
   end

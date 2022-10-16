@@ -27,6 +27,7 @@ class EmailsController < ApplicationController
     @email.email_type = 'outbound'
     @email.applicant = @applicant
     @email.user = current_user
+
     if @email.save
       html = render_to_string(partial: 'shared/flash', locals: { level: :success, content: 'Email sent!' })
       render operations: cable_car
