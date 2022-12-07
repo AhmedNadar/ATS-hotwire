@@ -21,8 +21,8 @@ class Email < ApplicationRecord
     InboundEmailNotification.create(
       user: user,
       params: {
-        applicant: applicant,
-        email: self
+        email: self,
+        applicant: applicant
       }
     )
   end

@@ -1,6 +1,16 @@
 
-<div data-controller="dropdown" id="notifications-container" class="relative" data-action="click@window->dropdown#hide">
-  <button class="relative px-1 py-4 text-gray-800 border-2 border-transparent rounded-full" id="notifications-menu" data-action="click->dropdown#toggle" aria-expanded="false">
+<div
+  id="notifications-container"
+  data-controller="dropdown"
+  data-action="click@window->dropdown#hide"
+  class="relative"
+  >
+  <button
+    id="notifications-menu"
+    data-action="click->dropdown#toggle"
+    aria-expanded="false"
+    class="relative px-1 py-4 text-gray-800 border-2 border-transparent rounded-full"
+    >
     <span class="sr-only">Notifications</span>
     <%= inline_svg_tag('bell.svg', class: "h-6 w-6") %>
     <% if user.notifications.unread.exists? %>
@@ -12,6 +22,10 @@
     <% end %>
   </button>
   <div class="absolute overflow-y-scroll bg-gray-100 rounded-md shadow-lg dropdown-content w-96 h-96 ring-1 ring-black ring-opacity-5" data-dropdown-target="content">
-    <%= turbo_frame_tag "notifications", src: notifications_path, autoscroll: true, data: { autoscroll_block: "start" } %>
+    <%= turbo_frame_tag "notifications",
+      src: notifications_path,
+       autoscroll: true,
+       data: { autoscroll_block: "start" }
+    %>
   </div>
 </div>
