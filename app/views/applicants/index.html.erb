@@ -8,6 +8,7 @@
   <%= render "filter_form" %>
 </div>
 <div class="flex items-baseline px-10 justify-baseline md:px-6">
-  <%= render "list", grouped_applicants: @grouped_applicants %>
+  <%= updates_for current_user.account, :applicants do %>
+    <%= render "list", grouped_applicants: @grouped_applicants %>
+  <% end %>
 </div>
-

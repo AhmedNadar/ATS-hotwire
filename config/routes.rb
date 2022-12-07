@@ -18,6 +18,14 @@ Rails.application.routes.draw do
     root to: 'dashboard#show', as: :user_root
   end
 
+  namespace :careers do
+    resources :accounts, only: %i[show] do
+      resources :jobs, only: %i[index show], shallow: true do
+        resources :applicants, only: %i[new create]
+      end
+    end
+  end
+
   devise_scope :user do
     root to: 'devise/sessions#new'
   end

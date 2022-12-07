@@ -1,3 +1,6 @@
 <h1>Dashboard#show</h1>
 <p>Find me in app/views/dashboard/show.html.erb</p>
+<br>
+<%= link_to "Career page", careers_account_path(current_user.account) %>
+<br>
 <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
