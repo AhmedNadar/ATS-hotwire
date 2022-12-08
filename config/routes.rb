@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   resources :notifications, only: %i[index]
   resources :users
 
+  resources :invites, only: %i[create update]
+  get 'invite', to: 'invites#new', as: 'accept_invite'
+
   devise_for :users,
     path: '',
     controllers: {

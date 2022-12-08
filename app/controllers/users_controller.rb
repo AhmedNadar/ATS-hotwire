@@ -14,22 +14,26 @@ class UsersController < ApplicationController
       .text_content('#slideover-header', text: 'Add a new user')
   end
 
-  def create
-    @user = User.new(user_params)
-    @user.account = current_user.account
-    @user.password = SecureRandom.alphanumeric(24)
+def create
+  @user = User.new(user_params)
+  @user.account = current_user.account
+  @user.password = SecureRandom.alphanumeric(24)
+  @user.invited_at = Time.current
+  @user.invite_token = Devise.friendly_token
+  @user.invited_by = current_user
 
-    if @user.save
-      html = render_to_string(partial: 'user', locals: { user: @user })
-      render operations: cable_car
-        .prepend('#users', html: html)
-        .dispatch_event(name: 'submit:success')
-    else
-      html = render_to_string(partial: 'form', locals: { user: @user })
-      render operations: cable_car
-        .inner_html('#user-form', html: html), status: :unprocessable_entity
-    end
+  if @user.save
+    UserInviteMailer.invite(@user).deliver_later
+    html = render_to_string(partial: 'user', locals: { user: @user })
+    render operations: cable_car
+      .prepend('#users', html: html)
+      .dispatch_event(name: 'submit:success')
+  else
+    html = render_to_string(partial: 'form', locals: { user: @user })
+    render operations: cable_car
+      .inner_html('#user-form', html: html), status: :unprocessable_entity
   end
+end
 
   def edit; end
 
