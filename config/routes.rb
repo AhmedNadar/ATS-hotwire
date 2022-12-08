@@ -1,11 +1,6 @@
 Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
-  get 'resumes/show'
-
-  resources :jobs
-  resources :notifications, only: %i[index]
-
   resources :applicants do
     patch :change_stage, on: :member
     resources :emails, only: %i[index new create show]
@@ -13,22 +8,9 @@ Rails.application.routes.draw do
     get :resume, action: :show, controller: 'resumes'
   end
 
-  get 'dashboard/show'
-  authenticated :user do
-    root to: 'dashboard#show', as: :user_root
-  end
-
-  namespace :careers do
-    resources :accounts, only: %i[show] do
-      resources :jobs, only: %i[index show], shallow: true do
-        resources :applicants, only: %i[new create]
-      end
-    end
-  end
-
-  devise_scope :user do
-    root to: 'devise/sessions#new'
-  end
+  resources :jobs
+  resources :notifications, only: %i[index]
+  resources :users
 
   devise_for :users,
     path: '',
@@ -44,4 +26,19 @@ Rails.application.routes.draw do
       sign_out: 'signout'
     }
 
+  get 'dashboard/show'
+  namespace :careers do
+    resources :accounts, only: %i[show] do
+      resources :jobs, only: %i[index show], shallow: true do
+        resources :applicants, only: %i[new create]
+      end
+    end
+  end
+  authenticated :user do
+    root to: 'dashboard#show', as: :user_root
+  end
+
+  devise_scope :user do
+    root to: 'devise/sessions#new'
+  end
 end
